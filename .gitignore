@@ -1,0 +1,8 @@
+﻿################################################################################
+# この .gitignore ファイルは Microsoft(R) Visual Studio によって自動的に作成されました。
+################################################################################
+
+/.vs
+/HogeQuest_DragonsFire/obj/Debug
+/HogeQuest_DragonsFire/.vs
+/HogeQuest_DragonsFire/bin/Debug
