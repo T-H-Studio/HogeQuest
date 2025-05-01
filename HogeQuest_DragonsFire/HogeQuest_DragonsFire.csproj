@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Maze\Config.cs" />
     <Compile Include="Maze\GameController.cs" />
-    <Compile Include="Maze\I_PlayerAccess.cs" />
+    <Compile Include="Maze\I_Gimmick.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Maze\MazeCreator.cs" />
     <Compile Include="Maze\MazeData.cs" />

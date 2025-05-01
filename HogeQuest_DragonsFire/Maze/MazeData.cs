@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze
 {
     /// <summary>
-    /// 迷宮全体の情報クラス 6.
+    /// 迷宮全体の情報クラス
     /// </summary>
     internal class MazeData
     {
@@ -41,10 +41,10 @@ namespace HogeQuest_DragonsFire.Maze
         }
 
         /// <summary>
-        /// 別の部屋に移動し、
-        /// 現在プレイヤーがいる事になる部屋のイベント実行メソッドを持ったI_PlayerAccess型を返す
+        /// direction方向の部屋に移動し、
+        /// 現在プレイヤーがいる事になる部屋で起きるギミック情報(I_Gimmick)を返す
         /// </summary>
-        public I_PlayerAccess MoveRoom(Direction direction)
+        public I_Gimmick MoveRoom(Direction direction)
         {
             //壁にぶつかっていなかったら現在座標を変更
             if (_wallManager.IsExistWall(NowPointX, NowPointY, direction) == false)
@@ -60,7 +60,7 @@ namespace HogeQuest_DragonsFire.Maze
                 }
             }
 
-            return _roomManager.GetRoomEvent(NowPointX, NowPointY);
+            return _roomManager.GetRoom(NowPointX, NowPointY);//アップキャスト
         }
     }
 }

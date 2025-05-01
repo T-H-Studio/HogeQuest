@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze
 {
     /// <summary>
-    /// 色んな設定を置いておくクラス  .17
+    /// 色んな設定を置いておくクラス
     /// </summary>
     internal class Config
     {

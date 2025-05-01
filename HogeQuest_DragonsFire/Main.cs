@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire
 {
     /// <summary>
-    /// これがないと動かないクラス  0.
+    /// これがないと動かないクラス
     /// </summary>
     internal class MainClass
     {
@@ -27,7 +27,7 @@ namespace HogeQuest_DragonsFire
             }
             finally 
             {
-                Console.Write("    また来てね");
+                Console.Write("    また来てね▼");
                 Console.ReadLine();
             }
         }

@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze.RoomType
 {
     /// <summary>
-    /// 特殊なイベントが起きる女神部屋のクラス  11.
+    /// 特殊なギミックが起きる女神部屋のクラス
     /// </summary>
     internal class Room_Goddess : RoomBase
     {
-        protected override void PlayEvent(PlayerData playerData)
+        protected override void PlayRoomGimmick(PlayerData playerData)
         {
             //全ての雑魚敵が倒されていればdefeatAllをtrue
             bool defeatAll = true;
             foreach (var room in _groupRooms[GroupID.AllEnemy])
             {
-                if (room.IsEnterd == false)
+                if (room.IsEnterd == false)//部屋に入っている≒倒しているなので、入ってない部屋があるなら倒せてない
                 {
                     defeatAll = false;
                     break;
@@ -35,6 +35,7 @@ namespace HogeQuest_DragonsFire.Maze.RoomType
                     ShowMazeMessage("「私が開放されたことで、迷宮の秘宝の封印もきっと解かれていることでしょう。」");
                     ShowMazeMessage("「探してください、迷宮の秘宝を。倒してください、かの黒龍を...」");
 
+                    //剣が置かれたroomの隠ぺいを解く
                     foreach (var room in _groupRooms[GroupID.GoddessAwakeDragonSword])
                     {
                         room.IsHidden = false;

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze.RoomType
 {
     /// <summary>
-    /// 回復薬がある部屋のクラス  10.
+    /// 回復薬がある部屋のクラス
     /// </summary>
     internal class Room_Tresure_Heal : RoomBase
     {
-        protected override void PlayEvent(PlayerData playerData)
+        protected override void PlayRoomGimmick(PlayerData playerData)
         {
             if (IsEnterd == false)//初めて訪れる時に実行
             {

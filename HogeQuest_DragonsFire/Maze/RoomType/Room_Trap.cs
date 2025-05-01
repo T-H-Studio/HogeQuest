@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze.RoomType
 {
     /// <summary>
-    /// トラップがある部屋のクラス  15.
+    /// トラップがある部屋のクラス
     /// </summary>
     internal class Room_Trap : RoomBase
     {
-        protected override void PlayEvent(PlayerData playerData)
+        protected override void PlayRoomGimmick(PlayerData playerData)
         {
             if (IsEnterd == false)
             {

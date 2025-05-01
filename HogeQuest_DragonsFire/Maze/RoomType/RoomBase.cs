@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze.RoomType
 {
     /// <summary>
-    /// 迷宮を構成する部屋を表す基底(基本)クラス   1.
+    /// 迷宮を構成する部屋を表す基底(基本)クラス
     /// </summary>
-    internal abstract class RoomBase : RoomData, I_PlayerAccess
+    internal abstract class RoomBase : RoomData, I_Gimmick
     {
         /// <summary>
         /// コンソール画面で、迷宮内のセリフを表示し始めるコンソール画面上の行位置
@@ -17,16 +17,16 @@ namespace HogeQuest_DragonsFire.Maze.RoomType
         private const int DEF_CURSOR_INDEX = 15;
 
         //インターフェースのメソッド
-        public void ChangeParameter(PlayerData playerData)
+        public void PlayGimmick(PlayerData playerData)
         {
-            //歩数は全イベント共通でカウント
+            //歩数は全ギミック共通でカウント
             playerData.WalkCount++;
 
             ClearMazeMessage();
 
             if (IsHidden == false)
             {
-                PlayEvent(playerData);
+                PlayRoomGimmick(playerData);
             }
             else
             {
@@ -35,9 +35,9 @@ namespace HogeQuest_DragonsFire.Maze.RoomType
         }
 
         /// <summary>
-        /// 部屋に入ると起こるイベント
+        /// 部屋に入ると起こるギミック
         /// </summary>
-        protected abstract void PlayEvent(PlayerData playerData);
+        protected abstract void PlayRoomGimmick(PlayerData playerData);
 
 
         /// <summary>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze
 {
     /// <summary>
-    /// プレイヤーの各種パラメータ  8.
+    /// プレイヤーの各種パラメータ
     /// </summary>
     internal class PlayerData
     {

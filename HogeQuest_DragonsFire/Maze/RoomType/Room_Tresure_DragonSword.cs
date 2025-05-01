@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze.RoomType
 {
     /// <summary>
-    /// 竜の剣がある部屋のクラス  12.
+    /// 竜の剣がある部屋のクラス
     /// </summary>
     internal class Room_Tresure_DragonSword : RoomBase
     {
@@ -17,7 +17,7 @@ namespace HogeQuest_DragonsFire.Maze.RoomType
             _groupRooms[GroupID.GoddessAwakeDragonSword].Add(this);
         }
 
-        protected override void PlayEvent(PlayerData playerData)
+        protected override void PlayRoomGimmick(PlayerData playerData)
         {
             if (IsEnterd == false)
             {

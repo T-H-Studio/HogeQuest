@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze
 {
     /// <summary>
-    /// 部屋の間に存在する壁を管理するクラス  3.
+    /// 部屋の間に存在する壁を管理するクラス
     /// </summary>
     internal class WallManager
     {

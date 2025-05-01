@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze.RoomType
 {
     /// <summary>
-    /// ボスがいる部屋のクラス  14.
+    /// ボスがいる部屋のクラス
     /// </summary>
     internal class Room_Boss : RoomBase
     {
@@ -16,7 +16,7 @@ namespace HogeQuest_DragonsFire.Maze.RoomType
             _groupRooms[GroupID.Boss].Add(this);
         }
 
-        protected override void PlayEvent(PlayerData playerData)
+        protected override void PlayRoomGimmick(PlayerData playerData)
         {
             if (IsEnterd == false)
             {

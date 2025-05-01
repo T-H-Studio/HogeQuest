@@ -9,7 +9,7 @@ namespace HogeQuest_DragonsFire.Maze
     /// <summary>難読クラス
     /// ゴール到達不能な迷宮が出来るのを回避するためにアルゴリズムを作るのが面倒なので
     /// 手打ちで迷宮を作るためのクラス。MAZE_SIZEが変わったら、
-    /// 書いた迷宮も大きさに合わせて書き換えないといけない点に注意    4.
+    /// 書いた迷宮も大きさに合わせて書き換えないといけない点に注意
     /// </summary>
     internal class MazeCreator
     {
@@ -89,7 +89,7 @@ namespace HogeQuest_DragonsFire.Maze
                 {
                     string allString = _mazeMap[i];
                     string halfRepRow = allString.Replace("―", "--");//全角の半角化
-                    string halfRepCol = halfRepRow.Replace("｜", "||");
+                    string halfRepCol = halfRepRow.Replace("｜", "||");//全角の半角化
 
                     string rowReplace = Regex.Replace(halfRepCol, @"\s", "++");//空白文字を++に変換する
                     string columnReplace = Regex.Replace(halfRepCol, @"\s", "");//空白文字を消す
@@ -143,7 +143,7 @@ namespace HogeQuest_DragonsFire.Maze
             {
                 for (int y = 0; y < Config.MAZE_SIZE; y++)
                 {
-                    RoomData room = _roomManager.GetRoomData(x, y);
+                    RoomData room = _roomManager.GetRoom(x, y);//アップキャスト
                     if (room.IsEnterd == true || room.IsHidden == true)
                     {
                         roomExistMazeMap[y] = CustomReplace(roomExistMazeMap[y], x, 2, "  ");

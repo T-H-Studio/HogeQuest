@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze.RoomType
 {
     /// <summary>
-    /// 雑魚敵がいる部屋のクラス  13.
+    /// 雑魚敵がいる部屋のクラス
     /// </summary>
     internal class Room_Enemy : RoomBase
     {
@@ -16,7 +16,7 @@ namespace HogeQuest_DragonsFire.Maze.RoomType
             _groupRooms[GroupID.AllEnemy].Add(this);
         }
 
-        protected override void PlayEvent(PlayerData playerData)
+        protected override void PlayRoomGimmick(PlayerData playerData)
         {
             if (IsEnterd == false)
             {

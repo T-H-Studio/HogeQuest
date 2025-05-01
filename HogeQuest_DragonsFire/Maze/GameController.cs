@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace HogeQuest_DragonsFire.Maze
 {
     /// <summary>
-    /// 迷宮を総括するクラス 5.
+    /// 迷宮を総括するクラス
     /// </summary>
     internal class GameController
     {
@@ -28,29 +28,27 @@ namespace HogeQuest_DragonsFire.Maze
         /// </summary>
         public void Play()
         {
-            ShowBeginMessage();
-            DrawMaze();
-
+            //入力カーソルをピコピコさせない
             Console.CursorVisible = false;
+
+            ShowBeginMessage();
 
             while (true) 
             {
-                //前回イベントが終わった後の状況を描画
-                Console.SetCursorPosition(0, 0);
+                //迷宮の状況を描画
                 DrawMaze();
 
-                //移動先の部屋で起こるイベントを実行するメソッドのみを持ったI_PlayerAccessインスタンスを取得
-                I_PlayerAccess playerAccess = MoveInput();
+                //MoveInput()で部屋移動を受付して、移動先の部屋のギミック情報を代入する。移動してなければnull。
+                I_Gimmick gimmick = MoveInput();
 
                 //移動が出来ていれば
-                if (playerAccess != null) 
+                if (gimmick != null) 
                 {
                     //キー入力後の状況を描画
-                    Console.SetCursorPosition(0, 0);
                     DrawMaze();
-                    
-                    //イベントを起こす
-                    playerAccess.ChangeParameter(_playerData);
+
+                    //ギミックを起動する
+                    gimmick.PlayGimmick(_playerData);
                 }
 
                 //ループを抜ける条件判定
@@ -76,6 +74,7 @@ namespace HogeQuest_DragonsFire.Maze
                 KeyWaitMessage("願わくばこの平和が、いつまでも続きますように―――");
                 Console.WriteLine("    CONGRATULATIONS !");
                 Console.WriteLine("YOU SAVE THE Hoge WORLD!");
+                Console.WriteLine("黒龍討伐にかかった歩数: " + _playerData.WalkCount);
             }
         }
 
@@ -88,15 +87,12 @@ namespace HogeQuest_DragonsFire.Maze
             Console.WriteLine("-Dragon's Fire-");
             Console.WriteLine();
             KeyWaitMessage("\"PRESS ENTER KEY\"");
-
+            KeyWaitMessage("ゲーム中にこういった文章を読み進める時はEnterを押してくれ。");
             KeyWaitMessage("ようこそ！Hogeの世界へ！");
 
             Console.WriteLine("君は今、世界の敵「黒龍」が潜む迷宮にやってきた。");
             Console.WriteLine("とても手ごわいが、きっと勝つ方法はあるはず。");
-            KeyWaitMessage("迷宮を探索し、黒龍を討ち果たそう！！");
-
-            Console.WriteLine("-説明-");
-            KeyWaitMessage("ゲーム中にこういった文章を読み進める時はEnterを押してくれ。");
+            KeyWaitMessage("迷宮を探索し、黒龍を討ち果たそう！！");            
 
             Console.WriteLine("-説明-");
             Console.WriteLine("迷宮の中は「↑←→↓」の矢印キーで移動が出来るぞ。");
@@ -118,6 +114,10 @@ namespace HogeQuest_DragonsFire.Maze
         {
             string[] strings = _mazeCreator.CreateConsoleMazeStrings(_mazeData.NowPointX, _mazeData.NowPointY);
 
+            //WriteLineなどのConsole出力関数が書き出す文字の開始位置を一番最初の位置にする。
+            //これならConsole.Clear()と違って、画面下のほうに出力された文字は消えずに残り続ける。
+            Console.SetCursorPosition(0, 0);
+
             foreach (string s in strings) 
             {
                 Console.WriteLine(s);
@@ -133,9 +133,9 @@ namespace HogeQuest_DragonsFire.Maze
 
         /// <summary>
         /// プレイヤーのキー入力を待ち、それが移動用の矢印キーなら移動をして、
-        /// 移動先のRoomの情報をI_PlayerAccess型に限定して戻す
+        /// 移動先のRoomの情報をI_Gimmick型に限定して戻す
         /// </summary>
-        private I_PlayerAccess MoveInput()
+        private I_Gimmick MoveInput()
         {
             switch (Console.ReadKey(true).Key)
             {
@@ -161,7 +161,7 @@ namespace HogeQuest_DragonsFire.Maze
         /// </summary>
         private void KeyWaitMessage(string message, ConsoleKey targetKey = ConsoleKey.Enter)
         {
-            Console.WriteLine(message);
+            Console.WriteLine(message + "▼");
 
             //設定されたキーを押していない限り、ループし続ける
             while (Console.ReadKey(true).Key != targetKey) { }
@@ -179,7 +179,7 @@ namespace HogeQuest_DragonsFire.Maze
 
             RoomData[] rooms = RoomData.GetGroupRooms(RoomBase.GroupID.Boss);
 
-            //1つでも到達(制覇)していないボス部屋があるなら未クリアとする
+            //1つでも到達(制覇)していないボス部屋があるなら未クリアとする(今回は1つしかない)
             foreach(var room in rooms) 
             {
                 if (room.IsEnterd == false)

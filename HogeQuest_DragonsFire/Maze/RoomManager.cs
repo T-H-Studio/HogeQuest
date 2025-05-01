@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace HogeQuest_DragonsFire.Maze
 {
-    //迷宮の部屋たちを管理するクラス  2.
+    //迷宮の部屋たちを管理するクラス
     internal class RoomManager
     {
         RoomBase[][] _mazeRooms;//部屋データ一覧
@@ -14,9 +14,9 @@ namespace HogeQuest_DragonsFire.Maze
             _mazeRooms = roomDatas;
         }
 
-        public RoomData GetRoomData(int pointX, int pointY) 
+        public RoomBase GetRoom(int pointX, int pointY)
         {
-            if(_mazeRooms.Length > pointY) 
+            if (_mazeRooms.Length > pointY)
             {
                 if (_mazeRooms[pointY] != null && _mazeRooms[pointY].Length > pointX)
                 {
@@ -26,12 +26,6 @@ namespace HogeQuest_DragonsFire.Maze
 
             Console.WriteLine("存在しない部屋座標が指定されました！: X " + pointX + ", Y " + pointY);
             return null;
-        }
-        public I_PlayerAccess GetRoomEvent(int pointX, int pointY)
-        { 
-            RoomBase rd = (RoomBase)GetRoomData(pointX, pointY);//ダウンキャスト
-
-            return rd;//アップキャスト
         }
 
         public void GetStartPoint(out int pointX, out int pointY) 
